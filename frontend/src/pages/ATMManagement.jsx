@@ -15,7 +15,7 @@ const STATUS_BADGE = {
 // ── Add/Edit Modal ───────────────────────────────────────────────────────────
 function ATMModal({ atm, branches, onClose, onSave }) {
   const [form, setForm] = useState(
-    atm || { branch_id:'', serial_number:'', model:'', manufacturer:'', location_address:'', atm_type:'onsite', max_capacity:13000000, software_version:'', status:'active' }
+    atm || { branch_id:'1', serial_number:'SBI-ATM-PUN-010', model:'NCR SelfServ 80', manufacturer:'NCR Corporation', location_address:'FC Road, Pune', atm_type:'onsite', max_capacity:15000000, software_version:'v5.0.2', status:'active' }
   );
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 

@@ -35,7 +35,7 @@ function Modal({ title, onClose, onSave, children }) {
 function BanksTab() {
   const [list,setList]=useState([]);
   const [showModal,setShowModal]=useState(false);
-  const [form,setForm]=useState({bank_name:'',swift_code:'',headquarters:'',phone:'',established_date:'',status:'active'});
+  const [form,setForm]=useState({bank_name:'Punjab National Bank',swift_code:'PUNB0IN',headquarters:'Plot 4, Sector 10, Dwarka, New Delhi',phone:'1800-180-2222',established_date:'1894-05-19',status:'active'});
   const set=(k,v)=>setForm(f=>({...f,[k]:v}));
   const load=()=>api.get('/master/banks').then(r=>setList(r.data));
   useEffect(()=>{load();},[]);
@@ -106,7 +106,7 @@ function BranchesTab() {
 function EmployeesTab() {
   const [list,setList]=useState([]);
   const [showModal,setShowModal]=useState(false);
-  const [form,setForm]=useState({branch_id:'',first_name:'',last_name:'',email:'',phone:'',role:'cashier',hire_date:'',status:'active'});
+  const [form,setForm]=useState({branch_id:'1',first_name:'Anita',last_name:'Rao',email:'anita.rao@sbi.co.in',phone:'9876543210',role:'manager',hire_date:'2023-01-15',status:'active'});
   const set=(k,v)=>setForm(f=>({...f,[k]:v}));
   const [branches,setBranches]=useState([]);
   const load=()=>api.get('/master/employees').then(r=>setList(r.data));
@@ -212,7 +212,7 @@ function CardsTab() {
 function VendorsTab() {
   const [list,setList]=useState([]);
   const [showModal,setShowModal]=useState(false);
-  const [form,setForm]=useState({vendor_name:'',contact_person:'',phone:'',email:'',license_number:'',contract_start:'',contract_end:'',status:'active'});
+  const [form,setForm]=useState({vendor_name:'CMS Info Systems',contact_person:'Rajesh Nair',phone:'1800-200-1111',email:'contact@cms.com',license_number:'CMS-LIC-2023',contract_start:'2024-01-01',contract_end:'2028-12-31',status:'active'});
   const set=(k,v)=>setForm(f=>({...f,[k]:v}));
   const load=()=>api.get('/master/vendors').then(r=>setList(r.data));
   useEffect(()=>{load();},[]);
@@ -259,7 +259,7 @@ function VendorsTab() {
 function DenominationsTab() {
   const [list,setList]=useState([]);
   const [showModal,setShowModal]=useState(false);
-  const [form,setForm]=useState({currency_code:'INR',value:'',description:''});
+  const [form,setForm]=useState({currency_code:'INR',value:'2000',description:'Two Thousand Rupees'});
   const set=(k,v)=>setForm(f=>({...f,[k]:v}));
   const load=()=>api.get('/master/denominations').then(r=>setList(r.data));
   useEffect(()=>{load();},[]);

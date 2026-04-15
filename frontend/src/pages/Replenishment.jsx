@@ -16,7 +16,7 @@ const STATUS_BADGE = {
 // ── Request Modal ────────────────────────────────────────────────────────────
 function RequestModal({ opts, onClose, onSave }) {
   const [form, setForm] = useState({
-    atm_id:'', vendor_id:'', requested_by:'', scheduled_date:'', notes:'', denominations:[]
+    atm_id:'1', vendor_id:'1', requested_by:'1', scheduled_date:'2026-04-20T10:00', notes:'Urgent cash refill due to high withdrawal rate during weekend.', denominations:[]
   });
   const set = (k,v) => setForm(f=>({...f,[k]:v}));
 

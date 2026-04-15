@@ -1102,3 +1102,47 @@ INSERT INTO ATM_ALERT (atm_id, resolved_by, alert_type, severity, message, statu
 (3, NULL, 'low_cash',      'critical', 'Cash level critically low at SBI Pune KP ATM. ₹500 cassette has only 180 notes remaining (below threshold of 200). Immediate replenishment required.',                    'active'),
 (4, NULL, 'hardware_fault','medium',   'Card reader fault detected at SBI Pune Camp ATM. Multiple card capture incidents logged. Machine taken offline for maintenance.',                                           'active'),
 (2, NULL, 'network_down',  'low',      'Intermittent network connectivity issues at SBI Mumbai Bandra ATM. Transaction success rate dropped to 87%. Monitoring in progress.',                                     'active');
+
+-- ===================== HISTORICAL CASH_REPLENISHMENT =====================
+INSERT INTO CASH_REPLENISHMENT (atm_id, vendor_id, requested_by, approved_by, request_date, scheduled_date, actual_date, total_amount, status, notes) VALUES
+(1, 1, 1, 1, '2026-03-01 09:00:00', '2026-03-02 10:00:00', '2026-03-02 10:30:00', 8000000.00, 'completed', 'Routine end-of-week replenishment.'),
+(2, 2, 4, 4, '2026-03-05 14:00:00', '2026-03-06 11:00:00', '2026-03-06 11:45:00', 5000000.00, 'completed', 'Emergency replenishment due to high weekend volume.'),
+(5, 2, 7, 7, '2026-03-10 08:30:00', '2026-03-11 09:30:00', '2026-03-11 09:50:00', 10000000.00, 'completed', 'Standard monthly refill.'),
+(1, 1, 1, 1, '2026-03-15 10:15:00', '2026-03-16 12:00:00', '2026-03-16 12:20:00', 6000000.00, 'completed', 'Mid-month replenishment.'),
+(3, 1, 4, 4, '2026-03-20 16:45:00', '2026-03-21 14:00:00', '2026-03-21 14:15:00', 8500000.00, 'completed', 'Pre-holiday replenishment.'),
+(4, 2, 7, 7, '2026-03-25 09:20:00', '2026-03-26 10:30:00', '2026-03-26 11:00:00', 7000000.00, 'completed', 'Routine replenishment.');
+
+-- ===================== HISTORICAL REPLENISHMENT_DETAIL =====================
+INSERT INTO REPLENISHMENT_DETAIL (replenishment_id, denomination_id, notes_count, amount) VALUES
+(3, 1, 10000, 5000000.00), (3, 2, 5000, 1000000.00), (3, 3, 15000, 1500000.00), (3, 4, 10000, 500000.00),
+(4, 1, 6000, 3000000.00), (4, 2, 4000, 800000.00), (4, 3, 10000, 1000000.00), (4, 4, 4000, 200000.00),
+(5, 1, 14000, 7000000.00), (5, 2, 5000, 1000000.00), (5, 3, 15000, 1500000.00), (5, 4, 10000, 500000.00),
+(6, 1, 7000, 3500000.00), (6, 2, 3000, 600000.00), (6, 3, 10000, 1000000.00), (6, 4, 18000, 900000.00),
+(7, 1, 10000, 5000000.00), (7, 2, 4000, 800000.00), (7, 3, 20000, 2000000.00), (7, 4, 14000, 700000.00),
+(8, 1, 8000, 4000000.00), (8, 2, 6000, 1200000.00), (8, 3, 15000, 1500000.00), (8, 4, 6000, 300000.00);
+
+-- ===================== HISTORICAL ATM_MAINTENANCE =====================
+INSERT INTO ATM_MAINTENANCE (atm_id, technician_id, maintenance_type, scheduled_date, actual_date, duration_minutes, issue_description, resolution, cost, status) VALUES
+(1, 2, 'preventive', '2026-02-10 10:00:00', '2026-02-10 10:30:00', 120, 'Monthly preventive maintenance.', 'All modules tested and cleaned. Receipt paper replaced.', 2500.00, 'completed'),
+(3, 5, 'corrective', '2026-02-15 14:00:00', '2026-02-15 15:00:00', 90, 'Cash dispenser jam reported by branch.', 'Dispenser path cleared. Extravagant dust removed from sensor.', 4000.00, 'completed'),
+(5, 8, 'preventive', '2026-03-01 09:30:00', '2026-03-01 10:00:00', 180, 'Quarterly comprehensive service.', 'Software updated to v4.2.1. Hard drive defragmented.', 3500.00, 'completed'),
+(2, 2, 'emergency', '2026-03-12 18:00:00', '2026-03-12 18:45:00', 150, 'ATM screen frozen and unresponsive.', 'Operating system rebooted. Faulty RAM module replaced.', 12000.00, 'completed'),
+(1, 5, 'preventive', '2026-03-25 11:00:00', '2026-03-25 11:30:00', 100, 'Bi-monthly cleaning and inspection.', 'Routine cleaning. Cash paths verified clear.', 2000.00, 'completed');
+
+-- ===================== HISTORICAL ATM_ALERT =====================
+INSERT INTO ATM_ALERT (atm_id, resolved_by, alert_type, severity, message, created_at, resolved_at, status) VALUES
+(1, 2, 'low_cash', 'high', 'Cash level below 15% capacity in ATM 1.', '2026-02-28 14:22:00', '2026-03-02 11:00:00', 'resolved'),
+(3, 5, 'hardware_fault', 'critical', 'Cash dispenser jam detected during transaction.', '2026-02-15 13:45:00', '2026-02-15 16:30:00', 'resolved'),
+(5, 8, 'network_down', 'medium', 'Loss of connection to host server for 5 minutes.', '2026-03-08 02:15:00', '2026-03-08 02:30:00', 'resolved'),
+(2, 2, 'vandalism', 'critical', 'Shock sensor triggered on ATM fascia.', '2026-03-12 23:45:00', '2026-03-13 01:15:00', 'resolved'),
+(4, 8, 'low_cash', 'low', 'Cash level approaching 20% in cassette 3.', '2026-03-24 16:10:00', '2026-03-26 11:30:00', 'resolved');
+
+-- ===================== AUDIT_LOG =====================
+INSERT INTO AUDIT_LOG (entity_type, entity_id, action, changed_by, changed_at, old_values, new_values) VALUES
+('ATM', 1, 'insert', 1, '2025-01-15 10:00:00', NULL, '{"serial_number": "SBI-ATM-MUM-001"}'),
+('ATM', 2, 'insert', 1, '2025-02-20 11:30:00', NULL, '{"serial_number": "SBI-ATM-MUM-002"}'),
+('CUSTOMER', 1, 'update', 4, '2025-06-12 14:15:00', '{"kyc_status": "pending"}', '{"kyc_status": "verified"}'),
+('CUSTOMER', 2, 'update', 4, '2025-07-25 09:40:00', '{"kyc_status": "pending"}', '{"kyc_status": "verified"}'),
+('EMPLOYEE', 5, 'update', 1, '2025-08-10 16:00:00', '{"role": "cashier"}', '{"role": "technician"}'),
+('ATM_CASSETTE', 3, 'update', 2, '2026-02-15 16:45:00', '{"status": "fault"}', '{"status": "active"}'),
+('CASH_REPLENISHMENT', 3, 'insert', 1, '2026-03-01 09:05:00', NULL, '{"total_amount": 8000000.00}');
