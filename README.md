@@ -1,117 +1,112 @@
-# ATM Cash Management System
-### PICT Pune Mini Project — DBMS + Discrete Mathematics
+# ATM Cash Management System 🏦
 
-**Color Theme:** Navy Blue `#1B2A6B` + Orange `#E87722`
+A comprehensive full-stack solution designed to optimize ATM cash logistics, track real-time transactions, and minimize cash-out events. Developed targeting essential database management and discrete mathematics principles.
+
+**Theme:** Navy Blue (`#1B2A6B`) + Orange (`#E87722`)
 
 ---
 
-## 🚀 Quick Start
+## 🎯 Project Overview
+
+This robust platform provides banks and Cash-in-Transit (CIT) vendors with real-time insights into ATM health, cash levels, and operational bottlenecks. By applying discrete mathematics for forecasting and optimization, the system maximizes efficiency across the bank's entire endpoint network.
+
+### ✨ Key Features
+- **Real-Time Monitoring:** Live dashboard tracking ATM states and cash levels.
+- **Predictive Analytics:** Forecasting algorithms based on moving averages and discrete math models to preemptively resolve shortages.
+- **Automated Alerts:** Instant triggers for low cash, hardware faults, and network downtime.
+- **Replenishment Workflow:** End-to-end lifecycle management of request, approval, and completion.
+- **Comprehensive Data Model:** 17 interconnected MySQL tables mapping branches, ATMs, cassettes, and granular transactions.
+
+---
+
+## 🌿 Environmental & Sustainability Goals
+
+The integration of smart logistics and data-driven routing directly contributes to significant environmental targets:
+
+- **Reduced Carbon Footprint:** Optimized cash replenishment routes for CIT vendors significantly decrease fleet fuel consumption.
+- **Resource Efficiency:** Precise cash forecasting minimizes unnecessary physical cash movements, lowering the overall energy required for logistics.
+- **Paperless Operations:** Fully digitized approval workflows, audit tracking, and reporting reduce paper waste across administrative tasks.
+- **Hardware Longevity:** Prompt notifications of hardware faults prevent cascading damage, reducing electronic waste (e-waste) and extending machine life cycles.
+
+---
+
+## 🛠️ Technical Architecture
+
+### Tech Stack
+- **Frontend Ecosystem:** React (Vite), Tailwind CSS to execute the color theme, and Recharts for visual analytics.
+- **Backend Ecosystem:** Node.js and Express.js implementing a robust, RESTful API architecture.
+- **Database Layer:** MySQL 8.0, maintaining strict data integrity and relations.
+
+### Core Analytics Modules (Discrete Mathematics)
+| Module | Description / Approach | Formula |
+|:---|:---|:---|
+| **Moving Average Forecasting** | Predicts short-term demand based on historic data. | `D(t+1) = Σ Dᵢ / n` |
+| **Safety Cash Calculator** | Calculates buffers required to avoid outages. | `SC = Z × σ` |
+| **Cash Balance Simulator** | Simulates future end-of-day balances dynamically. | `C(t+1) = C(t) − D(t) + R(t)` |
+| **Optimization Engine** | Minimizes overhead, refilling, and outage penalties. | `Min TC = Refill + Holding + Shortage` |
+
+---
+
+## 🚀 Quick Start Guide
 
 ### Prerequisites
-- Node.js 18+
-- MySQL 8.0+ running locally
+- **Node.js** (v18 or higher)
+- **MySQL** (v8.0 or higher)
 
 ### 1. Database Setup
-
-Open MySQL and run:
-```sql
-SOURCE c:/MY/MYPROJECTS/ATM/backend/db/schema.sql;
-SOURCE c:/MY/MYPROJECTS/ATM/backend/db/seed.sql;
-```
-
-Or via CLI:
+Initialize the base schema and populate it with seed data.
 ```bash
 mysql -u root -p < backend/db/schema.sql
 mysql -u root -p atm_cash_mgmt < backend/db/seed.sql
 ```
 
-### 2. Configure Environment
-
-Edit `backend/.env`:
-```
+### 2. Environment Configuration
+Create or modify `backend/.env`:
+```env
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
-DB_PASSWORD=YOUR_MYSQL_PASSWORD   ← change this!
+DB_PASSWORD=your_mysql_password
 DB_NAME=atm_cash_mgmt
 PORT=5000
 ```
 
-### 3. Start Backend
+### 3. Start the Backend Server
 ```bash
 cd backend
-npm install       # (already done)
+npm install
 node app.js
 # → 🚀 ATM API running on http://localhost:5000
 ```
 
-### 4. Start Frontend (new terminal)
+### 4. Start the Frontend Client
 ```bash
 cd frontend
+npm install
 npm run dev
-# → Open http://localhost:5173
+# → Application accessible at http://localhost:5173
 ```
 
 ---
 
-## 📁 Project Structure
+## 📁 Repository Structure
 
-```
-ATM/
+```text
 ├── backend/
-│   ├── db/
-│   │   ├── schema.sql         # 17 MySQL tables
-│   │   └── seed.sql           # SBI bank, branches, ATMs, 30-day txns
-│   ├── routes/
-│   │   ├── dashboard.js       # KPIs, ATM grid, weekly chart, alerts
-│   │   ├── atms.js            # ATM CRUD + cassette detail
-│   │   ├── transactions.js    # Filtered txns, denomination breakdown, CSV export
-│   │   ├── replenishments.js  # Replenishment workflow API
-│   │   ├── analytics.js       # Moving average + simulation data
-│   │   ├── alerts.js          # Alert resolve + audit log
-│   │   └── masterdata.js      # Reference data CRUD
-│   ├── db.js                  # MySQL connection pool
-│   ├── app.js                 # Express server
-│   └── .env                   # Database credentials
+│   ├── db/                 # Schema and robust seed data (17 tables)
+│   ├── routes/             # API endpoints (dashboard, atms, analytics, etc)
+│   ├── app.js              # Express application entrypoint
+│   └── db.js               # MySQL connection pool
 └── frontend/
-    └── src/
-        ├── pages/
-        │   ├── Dashboard.jsx          # KPIs, chart, ATM grid, quick actions
-        │   ├── ATMManagement.jsx      # Table, cassettes, Add/Edit modal
-        │   ├── Transactions.jsx       # Filter, paginate, denomination expand
-        │   ├── Replenishment.jsx      # Request → Approve → Complete workflow
-        │   ├── Analytics.jsx          # 4 Discrete Math sub-tabs
-        │   ├── ComparativeAnalysis.jsx# PPT-style table + 5 approach cards
-        │   ├── AlertsAudit.jsx        # Alert cards + audit log
-        │   └── MasterData.jsx         # 7 entity CRUD tabs
-        └── components/
-            ├── Sidebar.jsx
-            └── Header.jsx
+    ├── src/
+    │   ├── pages/          # Core views (Dashboard, Analytics, Alerts, etc)
+    │   └── components/     # Reusable layout and UI components
 ```
 
-## 🗄️ Database Schema (17 Tables)
+## 🗄️ Database Schema
 
-BANK · BRANCH · EMPLOYEE · ATM · DENOMINATION · ATM_CASSETTE ·
-CUSTOMER · ACCOUNT · CARD · TRANSACTION · TXN_DENOMINATION ·
-CIT_VENDOR · CASH_REPLENISHMENT · REPLENISHMENT_DETAIL ·
-ATM_MAINTENANCE · ATM_ALERT · AUDIT_LOG
+The core structure relies on 17 rigorously curated tables:
+![Tables] `BANK` · `BRANCH` · `EMPLOYEE` · `ATM` · `DENOMINATION` · `ATM_CASSETTE` · `CUSTOMER` · `ACCOUNT` · `CARD` · `TRANSACTION` · `TXN_DENOMINATION` · `CIT_VENDOR` · `CASH_REPLENISHMENT` · `REPLENISHMENT_DETAIL` · `ATM_MAINTENANCE` · `ATM_ALERT` · `AUDIT_LOG`
 
-## 📊 Analytics Modules (Discrete Mathematics)
-
-| Module | Formula |
-|---|---|
-| Moving Average Forecasting | D̂(t+1) = Σ Dᵢ / n |
-| Safety Cash Calculator | SC = Z×σ; Min = μ+SC |
-| Cash Balance Simulation | C(t+1) = C(t) − D(t) + R(t) |
-| Optimization Engine | Minimize TC = Refill + Holding + Shortage cost |
-
-## 🌱 Seed Data
-
-- **Bank:** State Bank of India
-- **Branches:** Mumbai Main, Pune Koregaon Park, Delhi Connaught Place
-- **ATMs:** 5 ATMs (Diebold Nixdorf, NCR, Hyosung)
-- **Transactions:** 30 days (weekday 8-10L, weekend 13-15L, month-end +30%)
-- **Alerts:** 3 active (low_cash critical, hardware_fault medium, network_down low)
-- **Vendors:** Brink's India, Loomis Cash Management
-- **Employees:** 9 (3 per branch)
-- **Customers:** 5 with accounts and RuPay/Visa debit cards
+## 🌱 Included Seed Data
+The repository provides extensive mock data representing operations for *State Bank of India*, including multiple branches, various ATM models (Diebold, NCR), 30 days of transactions scaled for weekends/weekdays, vendor data, and simulated system alerts.
