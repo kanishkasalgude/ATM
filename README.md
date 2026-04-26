@@ -157,12 +157,3 @@ This separation ensures maintainability, scalability, and modular development.
 ```bash
 mysql -u root -p < backend/db/schema.sql
 mysql -u root -p atm_cash_mgmt < backend/db/seed.sql
-
----
-
-If you're serious about standing out (and not looking like every other DBMS project on GitHub), your next move should be:
-- Add **ER diagram image + explanation section**
-- Add **API endpoint table**
-- Add **screenshots of dashboard**
-
-Right now this is *good*. With those, it becomes *top 5% project quality*.
