@@ -1,112 +1,184 @@
-# ATM Cash Management System 🏦
+ATM Cash Management System
 
-A comprehensive full-stack solution designed to optimize ATM cash logistics, track real-time transactions, and minimize cash-out events. Developed targeting essential database management and discrete mathematics principles.
+A full-stack ATM cash logistics and monitoring platform designed to manage cash flow, track transactions, and optimize replenishment operations across a banking network. The system is built with a strong focus on database design, entity relationships, and analytical modeling using discrete mathematics.
 
-**Theme:** Navy Blue (`#1B2A6B`) + Orange (`#E87722`)
+1. System Overview
 
----
+The ATM Cash Management System provides a centralized platform for banks to monitor ATM operations, manage cash inventory, and coordinate replenishment activities. It integrates core banking entities with ATM infrastructure to ensure efficient, secure, and scalable operations.
 
-## 🎯 Project Overview
+The system models real-world banking workflows, including customer transactions, ATM cash handling, vendor coordination, and system monitoring. It is designed to minimize downtime, prevent cash-out scenarios, and improve operational decision-making through structured data management.
 
-This robust platform provides banks and Cash-in-Transit (CIT) vendors with real-time insights into ATM health, cash levels, and operational bottlenecks. By applying discrete mathematics for forecasting and optimization, the system maximizes efficiency across the bank's entire endpoint network.
+2. Objectives
+Ensure continuous availability of cash in ATMs
+Maintain accurate tracking of denomination-wise cash distribution
+Provide real-time visibility into ATM status and performance
+Optimize replenishment scheduling and logistics
+Maintain auditability and security across all operations
+3. Key Functional Modules
+3.1 ATM Monitoring
 
-### ✨ Key Features
-- **Real-Time Monitoring:** Live dashboard tracking ATM states and cash levels.
-- **Predictive Analytics:** Forecasting algorithms based on moving averages and discrete math models to preemptively resolve shortages.
-- **Automated Alerts:** Instant triggers for low cash, hardware faults, and network downtime.
-- **Replenishment Workflow:** End-to-end lifecycle management of request, approval, and completion.
-- **Comprehensive Data Model:** 17 interconnected MySQL tables mapping branches, ATMs, cassettes, and granular transactions.
+Tracks ATM status, cash levels, and operational health. Each ATM is associated with a branch and maintains metadata such as location, capacity, and status.
 
----
+3.2 Transaction Management
 
-## 🌿 Environmental & Sustainability Goals
+Handles all ATM-based transactions, including withdrawals. Each transaction records:
 
-The integration of smart logistics and data-driven routing directly contributes to significant environmental targets:
+Account and card linkage
+Timestamp and amount
+Pre- and post-balance
+Status and failure reasons
+3.3 Cash and Denomination Management
 
-- **Reduced Carbon Footprint:** Optimized cash replenishment routes for CIT vendors significantly decrease fleet fuel consumption.
-- **Resource Efficiency:** Precise cash forecasting minimizes unnecessary physical cash movements, lowering the overall energy required for logistics.
-- **Paperless Operations:** Fully digitized approval workflows, audit tracking, and reporting reduce paper waste across administrative tasks.
-- **Hardware Longevity:** Prompt notifications of hardware faults prevent cascading damage, reducing electronic waste (e-waste) and extending machine life cycles.
+Manages physical cash inside ATMs using cassette-based storage:
 
----
+Each ATM contains multiple cassettes
+Each cassette stores a specific denomination
+Tracks capacity, current count, and thresholds
+3.4 Replenishment System
 
-## 🛠️ Technical Architecture
+Implements a workflow for cash refilling:
 
-### Tech Stack
-- **Frontend Ecosystem:** React (Vite), Tailwind CSS to execute the color theme, and Recharts for visual analytics.
-- **Backend Ecosystem:** Node.js and Express.js implementing a robust, RESTful API architecture.
-- **Database Layer:** MySQL 8.0, maintaining strict data integrity and relations.
+Request → Approval → Execution
+Managed by employees and fulfilled by CIT vendors
+Tracks denomination-wise replenishment details
+3.5 Maintenance and Alerts
+Logs ATM faults and maintenance operations
+Generates alerts for low cash, failures, or anomalies
+Tracks resolution by authorized personnel
+3.6 Audit Logging
 
-### Core Analytics Modules (Discrete Mathematics)
-| Module | Description / Approach | Formula |
-|:---|:---|:---|
-| **Moving Average Forecasting** | Predicts short-term demand based on historic data. | `D(t+1) = Σ Dᵢ / n` |
-| **Safety Cash Calculator** | Calculates buffers required to avoid outages. | `SC = Z × σ` |
-| **Cash Balance Simulator** | Simulates future end-of-day balances dynamically. | `C(t+1) = C(t) − D(t) + R(t)` |
-| **Optimization Engine** | Minimizes overhead, refilling, and outage penalties. | `Min TC = Refill + Holding + Shortage` |
+Maintains a complete audit trail of all critical operations:
 
----
+Entity changes
+User actions
+Before/after state tracking
+4. Database Design and ER Model
 
-## 🚀 Quick Start Guide
+The system is built on a relational database consisting of 17 interconnected tables. The schema is designed to enforce data integrity using primary and foreign key constraints, ensuring consistency across all operations.
 
-### Prerequisites
-- **Node.js** (v18 or higher)
-- **MySQL** (v8.0 or higher)
+Core Entity Groups
 
-### 1. Database Setup
-Initialize the base schema and populate it with seed data.
-```bash
+Banking Structure
+
+BANK
+BRANCH
+EMPLOYEE
+
+Customer Management
+
+CUSTOMER
+ACCOUNT
+CARD
+
+ATM Infrastructure
+
+ATM
+ATM_CASSETTE
+DENOMINATION
+
+Transaction System
+
+TRANSACTION
+TXN_DENOMINATION
+
+Cash Operations
+
+CASH_REPLENISHMENT
+REPLENISHMENT_DETAIL
+CIT_VENDOR
+
+Monitoring and Control
+
+ATM_MAINTENANCE
+ATM_ALERT
+AUDIT_LOG
+Relationship Highlights
+A bank manages multiple branches
+Each branch operates multiple ATMs and accounts
+Customers own accounts and associated cards
+Transactions are linked to ATMs, accounts, and cards
+ATMs store cash through denomination-based cassettes
+Replenishment operations involve vendors and employees
+Alerts and maintenance records are tied to ATMs
+
+This structured ER model ensures normalization, reduces redundancy, and supports scalable query operations.
+
+5. Analytical and Optimization Components
+
+The system incorporates discrete mathematics models to improve operational efficiency:
+
+Demand Forecasting using moving averages
+Safety Cash Estimation to prevent shortages
+Cash Flow Simulation for predicting balances
+Cost Optimization for minimizing replenishment and holding costs
+
+These models enable proactive decision-making instead of reactive maintenance.
+
+6. Technology Stack
+Frontend
+React (Vite)
+Tailwind CSS
+Recharts
+Backend
+Node.js
+Express.js
+Database
+MySQL 8.0
+7. System Architecture
+
+The application follows a layered architecture:
+
+Presentation Layer: User interface for dashboards and analytics
+Application Layer: RESTful APIs handling business logic
+Data Layer: Relational database with normalized schema
+
+This separation ensures maintainability, scalability, and modular development.
+
+8. Setup Instructions
+Prerequisites
+Node.js (v18 or higher)
+MySQL (v8.0 or higher)
+Database Initialization
 mysql -u root -p < backend/db/schema.sql
 mysql -u root -p atm_cash_mgmt < backend/db/seed.sql
-```
+Environment Configuration
 
-### 2. Environment Configuration
-Create or modify `backend/.env`:
-```env
+Create backend/.env:
+
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=atm_cash_mgmt
 PORT=5000
-```
-
-### 3. Start the Backend Server
-```bash
+Run Backend
 cd backend
 npm install
 node app.js
-# → 🚀 ATM API running on http://localhost:5000
-```
-
-### 4. Start the Frontend Client
-```bash
+Run Frontend
 cd frontend
 npm install
 npm run dev
-# → Application accessible at http://localhost:5173
-```
+9. Repository Structure
+backend/
+  db/               Database schema and seed data
+  routes/           API endpoints
+  app.js            Application entry point
+  db.js             Database connection
 
----
+frontend/
+  src/
+    pages/          Application views
+    components/     Reusable UI components
+10. Sample Data
 
-## 📁 Repository Structure
+The system includes seed data simulating real-world operations:
 
-```text
-├── backend/
-│   ├── db/                 # Schema and robust seed data (17 tables)
-│   ├── routes/             # API endpoints (dashboard, atms, analytics, etc)
-│   ├── app.js              # Express application entrypoint
-│   └── db.js               # MySQL connection pool
-└── frontend/
-    ├── src/
-    │   ├── pages/          # Core views (Dashboard, Analytics, Alerts, etc)
-    │   └── components/     # Reusable layout and UI components
-```
+Multiple bank branches
+Different ATM models
+Transaction history across multiple days
+Vendor and replenishment records
+System-generated alerts and logs
+11. Conclusion
 
-## 🗄️ Database Schema
-
-The core structure relies on 17 rigorously curated tables:
-![Tables] `BANK` · `BRANCH` · `EMPLOYEE` · `ATM` · `DENOMINATION` · `ATM_CASSETTE` · `CUSTOMER` · `ACCOUNT` · `CARD` · `TRANSACTION` · `TXN_DENOMINATION` · `CIT_VENDOR` · `CASH_REPLENISHMENT` · `REPLENISHMENT_DETAIL` · `ATM_MAINTENANCE` · `ATM_ALERT` · `AUDIT_LOG`
-
-## 🌱 Included Seed Data
-The repository provides extensive mock data representing operations for *State Bank of India*, including multiple branches, various ATM models (Diebold, NCR), 30 days of transactions scaled for weekends/weekdays, vendor data, and simulated system alerts.
+This system demonstrates a practical implementation of database management concepts through a real-world banking use case. The strength of the project lies in its structured ER model, normalized schema, and integration of analytical techniques for operational optimization.
